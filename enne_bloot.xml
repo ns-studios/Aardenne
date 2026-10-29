@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE muclient>
+<!-- Saved on Friday, February 18, 2022, 9:09 PM -->
+<!-- MuClient version 5.07-pre -->
+
+<muclient>
+<plugin
+   name="enne_bloot"
+   author="enne"
+   id="2d856590e3c1d6ee8b1ab0f9"
+   language="Lua"
+   purpose="type bloot polished to see its level (1-21)"
+   date_written="2022-02-18 21:08:23"
+   requires="5.07"
+   version="1.0"
+   >
+
+</plugin>
+<aliases>
+<alias
+match="^bloot (.*?)(?: (.*?))?$"
+regexp="y"
+enabled="y"
+script="blootlevel"
+>
+</alias>
+</aliases>
+
+<script>
+<![CDATA[
+local count=21 -- Don't look at me, blame table.getn!
+local bloot={
+[1]="polished",
+[2]="enhanced",
+[3]="burnished",
+[4]="shiny",
+[5]="vibrant",
+[6]="sparkling",
+[7]="gleaming",
+[8]="shimmering",
+[9]="dazzling",
+[10]="brilliant",
+[11]="radiant",
+[12]="wondrous",
+[13]="majestic",
+[14]="exalted",
+[15]="eternal",
+[16]="legendary",
+[17]="epic",
+[18]="mythical",
+[19]="fabled",
+[20]="divine",
+[21]="godly"
+}
+local colors={
+["polished"]="Green",
+["enhanced"]="Green",
+["burnished"]="Green",
+["shiny"]="Green",
+["vibrant"]="Green",
+["sparkling"]="Green",
+["gleaming"]="Green",
+["shimmering"]="Green",
+["dazzling"]="Green",
+["brilliant"]="Green",
+["radiant"]="Red",
+["wondrous"]="Red",
+["majestic"]="Red",
+["exalted"]="Red",
+["eternal"]="Red",
+["legendary"]="Yellow",
+["epic"]="Yellow",
+["mythical"]="Yellow",
+["fabled"]="Yellow",
+["divine"]="Yellow",
+["godly"]="White"
+}
+
+function OnPluginInstall()
+help()
+end-- func
+
+function help()
+Note("Bloot by Enne. Type e.g., bloot polished to see its bonus loot level. Type bloot list for the list of all bonus loot flag names, levels, and colors, you can also type bloot list <color> to list only bonus loot flags of a specific color, bloot report <channel> or bloot vireport <channel> to report all to a channel, and type bloot help for help. Note that you can also type incomplete names like bloot god for godly.")
+end-- func
+
+function blootlevel(name, line, val)
+if val[1]=="" then
+return
+end-- if
+val[1]=string.lower(val[1])
+if val[1]=="help" then
+return help()
+end-- if
+
+if val[1]=="list" then
+for k, v in pairs(bloot) do
+if val[2]~="" then
+if string.lower(colors[v])==string.lower(val[2]) then
+Note(v.." "..k.." "..colors[v])
+end-- if
+else
+Note(v.." "..k.." "..colors[v])
+end-- if
+end-- for
+return
+end-- if
+
+if (val[1]=="report" or val[1]=="vireport") and val[2]~=nil then
+local tmp=""
+for k, v in pairs (bloot) do
+if val[1]=="report" then
+if v~="godly" then
+tmp=tmp.."@"..string.sub(colors[v], 1, 1).."(@W"..v.."@"..string.sub(colors[v], 1, 1)..")@W, "
+else
+tmp=tmp.."@"..string.sub(colors[v], 1, 1).."(@R"..v.."@"..string.sub(colors[v], 1, 1).."), "
+end-- if
+else
+tmp=tmp..v..": "..colors[v]..", "
+end-- if
+end-- for
+Send(val[2].." "..string.sub(tmp, 1, string.len(tmp)-2))
+return
+end-- if
+
+local found=-1
+for k, v in pairs (bloot) do
+if string.find(v, "^"..val[1]..".*$")~=nil then
+found=k
+break
+end-- if
+end-- for
+if found==-1 then
+return Note("Not found.")
+end-- if
+Note("Level "..found.."/"..count.." "..bloot[found].." ("..colors[bloot[found]]..")")
+end-- func
+]]>
+</script>
+</muclient>

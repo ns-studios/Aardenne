@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="iso-8859-1"?> <!DOCTYPE muclient><muclient> <script><![CDATA[
+function write_note(name, line, wc)
+	local board, recipient, subject, message, i, j
+	board=utils.inputbox("", "note board", "")
+	if board==nil or board=="" then Note("Note writing canceled.") return end
+	Send("board "..board)
+	Send("note write")
+	recipient=utils.inputbox("", "note recipient", "")
+	if recipient==nil or recipient=="" then Send("a\na\n.q") return end
+	Send(recipient)
+	subject=utils.inputbox("", "note subject", "")
+	if subject==nil or subject=="" then Send("a\n.q") return end
+	Send(subject)
+	message=utils.editbox("", "note message", "")
+	if message==nil or message=="" then Send(".q") return end
+	j=0.0
+	for i in string.gmatch(message, "[^\r\n]+") do
+		j=j+0.1
+		DoAfter(j, i)
+	end-- for
+	DoAfterNote(j, "Done!")
+end-- func
+]]></script>
+<aliases>
+	<alias
+		match="write note"
+		enabled="y"
+		script="write_note"
+		>
+	</alias>
+</aliases>
+<plugin
+   name="enne_noteSender"
+   author="Enne"
+   id="ad36d68fbffe63eecfcfcb2a"
+   language="Lua"
+   purpose="sends notes"
+   save_state="y"
+   date_written="2024-01-24 02:07:51"
+   requires="5.07"
+   version="1.0"
+   >
+
+</plugin>
+</muclient>

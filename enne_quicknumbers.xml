@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE muclient>
+<muclient>
+<plugin
+   name="enne_quicknumbers"
+   author="Enne"
+   id="c1bc3400b8ab0d3079653159"
+   language="Lua"
+   purpose="easier typing of big numbers. use ?.?k$ for thousands, ?.?m$ for millions, ?.?b$ for billions"
+   date_written="2022-06-11 20:40:50"
+   requires="5.07"
+   version="1.0"
+   >
+</plugin>
+
+<aliases>
+<alias
+match="^(.*? )([\-\d\.]+)([kmb])\$((?: |$).*)$"
+regexp="y"
+enabled="y"
+send_to="12"
+script="process"
+>
+</alias>
+</aliases>
+
+<script>
+<![CDATA[
+local num=0
+function process(name, line, val)
+num=tonumber(val[2])
+if val[3]=="k" then
+num=num*1000
+elseif val[3]=="m" then
+num=num*1000000
+elseif val[3]=="b" then
+num=num*1000000000
+end-- if
+Execute(val[1]..num..val[4])
+end-- func
+]]>
+</script>
+
+</muclient>
