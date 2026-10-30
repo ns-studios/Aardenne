@@ -8,7 +8,9 @@ Welcome to Enne's magical Aardwolf plugin garden.
 ### 💰 Bloot
 
 Originally written for Bootcamp forum.
+
 Type bloot &lt;flag&gt;, e.g., &ldquo;bloot polished&rdquo; to see its color and level.
+
 Partial matches are also accepted, e.g., &ldquo;bloot god&rdquo; for godly.
 
 Commands:
@@ -45,6 +47,7 @@ Shows help
 ### 🧰 Newlines to Spaces
 
 Fixes multiline text in clipboard by converting it to spaces so that it can be sent to a channel or as a tell.
+
 Type &ldquo;nl2s&rdquo;, and the same text with newlines converted to spaces will be copied to clipboard, ready for pasting.
 
 Commands:
@@ -74,7 +77,6 @@ The messages are separated by a new line (inserted by pressing enter), and there
 * %name%
 
 Your character's name.
-
 
 * %target%
 
@@ -106,6 +108,7 @@ Shows help.
 ### 🧮 Quick Numbers
 
 A shortcut for writing bigger numbers like 125000 as 125k$
+
 Thousand=k, million=m, billion=b. Decimals are supported.
 
 Examples:
@@ -120,6 +123,7 @@ Examples:
 ### 🍂 QuitCheck
 
 **Update on 2026-10-29: now that keys no longer disappear when logging out, this plugin is no longer relevant as far as I can tell, but it's still here for archive purposes.**
+
 Type &ldquo;qc put &lt;container&gt;&rdquo; to have the script put items that would be lost when disconnecting into a container, taking them out of containers or off of your keyring as it does. The items are remembered, so typing &ldquo;qc get &lt;container&gt;&rdquo; gets the same items from the container once you connect again, placing them into their original containers/on your keyring.
 
 qc put guitar
@@ -143,13 +147,14 @@ trep ft
 ### ✉ Note Sender
 
 Sends huge notes one line at a time in order to prevent timing out/disconnecting.
+
 Type &ldquo;write note&rdquo; and follow the wizard.
 
 Commands:
 
 * write note
 
-Starts note writing process. The note is actually composed/sent to the game line by line only once you go through the entire wizard first.
+Starts the note writing process. The note is actually composed/sent to the game line by line only once you go through the entire wizard first.
 
 * Written 2024-01-24
 * Published 2026-10-29
